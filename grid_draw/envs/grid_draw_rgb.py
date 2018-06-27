@@ -1,7 +1,7 @@
 import gym
 import numpy as np
 
-class GridDrawBwEnv(gym.Env):
+class GridDrawRgbEnv(gym.Env):
     metadata = {'render.modes': ['human']}
 
     def __init__(self):
