@@ -7,9 +7,10 @@ class GridDrawBwEnv(gym.Env):
     metadata = {'render.modes': ['human']}
 
     def __init__(self):
-        self.grid_size = 28
+        self.grid_size = 14
         self.action_space = spaces.Discrete(6)
-        self.observation_space = spaces.MultiDiscrete([self.grid_size, self.grid_size])
+        self.observation_space = spaces.Box(low=0, high=255,
+                                            shape=(2, self.grid_size, self.grid_size), dtype=np.float32)
         self.current_state = None
         self.done = None
         self.position = None
@@ -23,7 +24,8 @@ class GridDrawBwEnv(gym.Env):
             return self.current_state, 0, True, None
 
         if action == 4:
-            self.current_state[0][tuple(self.position)] += 5 * int(self.current_state[0][tuple(self.position)] < 255)
+            self.current_state[0][tuple(self.position)] += 15 * int(self.current_state[0][tuple(self.position)] < 255)
+            self.current_state[0][tuple(self.position)] = min(self.current_state[0][tuple(self.position)], 255)
             return self.current_state, 0, False, None
 
         if action == 0:  # move up
