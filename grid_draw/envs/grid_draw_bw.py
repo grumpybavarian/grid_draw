@@ -8,7 +8,7 @@ class GridDrawBwEnv(gym.Env):
 
     def __init__(self):
         self.grid_size = 14
-        self.action_space = spaces.Discrete(6)
+        self.action_space = spaces.Discrete(11)
         self.observation_space = spaces.Box(low=0, high=255,
                                             shape=(2, self.grid_size, self.grid_size), dtype=np.float32)
         self.current_state = None
@@ -19,13 +19,14 @@ class GridDrawBwEnv(gym.Env):
         if self.done:
             raise RuntimeError("Episode has finished. Call env.reset() to start a new episode.")
 
-        if action == 5:
+        if action == 10:
             self.done = True
             return self.current_state, 0, True, None
 
-        if action == 4:
-            self.current_state[0][tuple(self.position)] += 15 * int(self.current_state[0][tuple(self.position)] < 255)
-            self.current_state[0][tuple(self.position)] = min(self.current_state[0][tuple(self.position)], 255)
+        if action >= 4 and action <=9:
+            bw_values = [0, 50, 100, 150, 200, 250]
+
+            self.current_state[0][tuple(self.position)] = bw_values[action - 4]
             return self.current_state, 0, False, None
 
         if action == 0:  # move up
