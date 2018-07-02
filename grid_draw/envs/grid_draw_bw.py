@@ -31,7 +31,7 @@ class GridDrawBwEnv(gym.Env):
 
         self.current_state[1][tuple(self.position)] = 1
 
-        if self.position[0] == self.grid_size - 1 and self.position[1] == self.grid_size - 1:
+        if self.position[1] == self.grid_size:
             return self.current_state, 0, True, None
 
         return self.current_state, 0, False, None
