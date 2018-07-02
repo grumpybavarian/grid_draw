@@ -23,8 +23,6 @@ class GridDrawBwEnv(gym.Env):
 
         self.current_state[0][tuple(self.position)] = bw_values[action] / 255.
 
-        self.current_state[1][tuple(self.position)] = 0
-
         self.position[0] += 1
         self.position[0] %= self.grid_size
         self.position[1] += int(self.position[0] == 0)
@@ -32,6 +30,7 @@ class GridDrawBwEnv(gym.Env):
         if self.position[1] == self.grid_size:
             return self.current_state, 0, True, None
 
+        self.current_state[1][tuple(self.position)] = 0
         self.current_state[1][tuple(self.position)] = 1
 
         return self.current_state, 0, False, None
