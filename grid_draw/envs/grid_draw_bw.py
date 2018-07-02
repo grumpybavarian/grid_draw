@@ -7,7 +7,7 @@ class GridDrawBwEnv(gym.Env):
     metadata = {'render.modes': ['human']}
 
     def __init__(self):
-        self.grid_size = 5
+        self.grid_size = 10
         self.action_space = spaces.Discrete(6)
         self.observation_space = spaces.Box(low=0, high=255,
                                             shape=(2, self.grid_size, self.grid_size), dtype=np.float32)
