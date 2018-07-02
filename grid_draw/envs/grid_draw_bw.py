@@ -53,7 +53,7 @@ class GridDrawBwEnv(gym.Env):
         canvas = np.zeros((self.grid_size, self.grid_size))
         position_matrix = np.zeros((self.grid_size, self.grid_size))
 
-        self.position = np.array([0, 0])
+        self.position = np.random.randint(0, self.grid_size, (2,))
 
         position_matrix[tuple(self.position)] = 1
 
