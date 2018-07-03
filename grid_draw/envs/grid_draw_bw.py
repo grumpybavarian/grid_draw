@@ -20,9 +20,9 @@ class GridDrawBwEnv(gym.Env):
             raise RuntimeError("Episode has finished. Call env.reset() to start a new episode.")
 
         if action == 0:
-            self.current_state[0][tuple(self.position)] += 25
-            np.clip(self.current_state[0][tuple(self.position)], 0, 250)
-            return self.current_state / 255., 0, False, None
+            self.current_state[0][tuple(self.position)] += 25 / 255.
+            np.clip(self.current_state[0][tuple(self.position)], 0., 1.)
+            return self.current_state, 0, False, None
 
         self.current_state[1][tuple(self.position)] = 0
 
